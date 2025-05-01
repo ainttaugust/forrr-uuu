@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Play Me Baby</title>
   <style>
     body {
@@ -50,25 +50,33 @@
     #media {
       display: none;
       margin-top: 30px;
-      display: flex;
+      flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
       align-items: flex-start;
-      flex-wrap: wrap;
       z-index: 2;
       position: relative;
     }
 
+    #images,
+    #video {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1 1 300px;
+    }
+
     #images img {
-      width: 50%;
-      max-width: 250px;
+      width: 100%;
+      max-width: 200px;
       border-radius: 15px;
       margin: 10px 0;
       border: 2px solid pink;
+      height: auto;
     }
 
     #video video {
-      width: 50%;
+      width: 100%;
       max-width: 300px;
       border: 3px solid palevioletred;
       border-radius: 20px;
@@ -115,32 +123,11 @@
         opacity: 0;
       }
     }
-
-    /* Ensure responsiveness on small screens */
-    @media (max-width: 600px) {
-      h2 {
-        font-size: 20px;
-      }
-
-      button {
-        padding: 12px 20px;
-        font-size: 14px;
-      }
-
-      #message p {
-        font-size: 16px;
-      }
-
-      #media {
-        flex-direction: column;
-      }
-    }
   </style>
 </head>
 <body>
 
   <h2>Hi baby, tap this when you're ready for a surprise</h2>
-
   <button onclick="startSurprise()">Click me</button>
 
   <!-- Hidden Audio -->
@@ -152,22 +139,22 @@
   <!-- Hidden Message -->
   <div id="message">
     <p>
-      Hey love, I just want you to know how much you mean to me. <br>
-      Every moment with you feels magical, and I'm beyond grateful to have you in my life.<br>
+      Hey love, I just want you to know how much you mean to me. <br />
+      Every moment with you feels magical, and I'm beyond grateful to have you in my life.<br />
       You’re the reason I smile, and I’ll keep loving you more each day.
     </p>
   </div>
 
-  <!-- Images + Video Hidden Initially -->
-  <div id="media" style="display: none;">
+  <!-- Images + Video -->
+  <div id="media">
     <div id="images">
-      <img src="ring.jpg" alt="Image 1">
-      <img src="letter.jpg" alt="Image 2">
-      <img src="us.jpg" alt="Image 3">
+      <img src="ring.jpg" alt="Ring Image" />
+      <img src="letter.jpg" alt="Letter Image" />
+      <img src="us.jpg" alt="Us Image" />
     </div>
     <div id="video">
-      <video controls>
-        <source src="vid.mp4" type="video/mp4">
+      <video id="surprise-video" autoplay muted controls>
+        <source src="vid.mp4" type="video/mp4" />
         Your browser does not support video playback.
       </video>
     </div>
@@ -179,6 +166,7 @@
       document.getElementById('message').style.display = 'block';
       setTimeout(() => {
         document.getElementById('media').style.display = 'flex';
+        document.getElementById('surprise-video').play();
       }, 1000);
     }
 
